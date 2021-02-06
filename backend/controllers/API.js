@@ -47,9 +47,8 @@ ModelHandler = async (req, res) => {
   //   });
   //   let msg = response.data["message"];
 
-  const fileName = `${
-    Crypto.randomBytes(6).toString("hex") + "-" + image.name
-  }`;
+  let fileName = Crypto.randomBytes(6).toString("hex") + "_" + image.name;
+  fileName = fileName.replace(/ /g, "_");
   let caption = "test caption";
 
   image.mv(`./uploads/${fileName}`);

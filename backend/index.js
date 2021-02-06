@@ -31,6 +31,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use("/image", express.static("uploads"));
+
 app.get("/", (req, res) => {
   res.send("Server up and running");
 });
