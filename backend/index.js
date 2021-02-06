@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const fileUpload = require("express-fileupload");
 
 const API = require("./routes/API");
@@ -28,6 +29,7 @@ app.use(
 );
 
 app.use(cors());
+app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
