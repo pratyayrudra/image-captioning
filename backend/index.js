@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 
 const API = require("./routes/API");
 
 const app = express();
-app.use(express.json());
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -18,6 +20,16 @@ mongoose.connect(
     }
   }
 );
+
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Server up and running");
