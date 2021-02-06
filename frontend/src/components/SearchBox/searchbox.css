@@ -1,0 +1,12 @@
+.search-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.search-box-input {
+	width: 50vw;
+	padding: 0.5rem;
+	outline: none;
+	border-radius: 8px;
+	border: 1px solid black;
+}
