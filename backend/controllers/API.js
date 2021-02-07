@@ -1,5 +1,8 @@
 const ImageStore = require("../models/ImageStore");
 const Crypto = require("crypto");
+const FormData = require("form-data");
+const axios = require("axios").default;
+var fs = require("fs");
 
 GetHandler = async (req, res) => {
   const q = req.query.q ? req.query.q : "";
@@ -38,20 +41,18 @@ GetHandler = async (req, res) => {
 ModelHandler = async (req, res) => {
   const image = req.files.image;
 
-  //   let data = new FormData();
-  //   data.append("image", image);
-  //   let response = await axios.post(process.env.MODEL_URL, data, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-  //   let msg = response.data["message"];
-
   let fileName = Crypto.randomBytes(6).toString("hex") + "_" + image.name;
   fileName = fileName.replace(/ /g, "_");
-  let caption = "test caption";
 
   image.mv(`./uploads/${fileName}`);
+
+  let data = new FormData();
+  data.append("file1", fs.createReadStream(`./uploads/${fileName}`));
+  let response = await axios.post(process.env.MODEL_URL, data, {
+    headers: data.getHeaders(),
+  });
+
+  let caption = response.data;
 
   let NewImageStore = new ImageStore({
     imageName: fileName,
