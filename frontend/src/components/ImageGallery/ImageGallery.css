@@ -1,6 +1,11 @@
 .wrapper {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+	display: flex;
+	width: 70vw;
+	justify-content: space-around;
+	margin-top: 50px;
+	flex-wrap: wrap;
+}
+
+.wrapper:nth-child(2n) {
+	flex-basis: 100%;
 }
