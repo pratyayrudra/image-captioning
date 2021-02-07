@@ -3,9 +3,12 @@ import "./searchbox.css";
 const SearchBox = (props) => {
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    // TODO: Get query results
-  });
+  useEffect(async () => {
+    let url = `http://localhost:8000/api?q=${query}&limit=10`;
+    let response = await fetch(url);
+    let json = await response.json();
+    props.setSearchResults(json);
+  }, [query]);
 
   return (
     <div
