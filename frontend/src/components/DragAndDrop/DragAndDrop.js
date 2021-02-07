@@ -27,7 +27,6 @@ const DragAndDrop = () => {
       ></img>
     </div>
   ));
-  console.log(files);
 
   let uploadFile = () => console.log("upload file");
 
