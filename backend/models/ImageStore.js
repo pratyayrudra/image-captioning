@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ImageStore = mongoose.Schema({
-  path: String,
+  imageName: String,
   caption: String,
   createdAt: {
     type: Date,
