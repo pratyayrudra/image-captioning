@@ -1,53 +1,57 @@
-import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import './draganddrop.css';
+import React, { useState } from "react";
+import { useDropzone } from "react-dropzone";
+import "./draganddrop.css";
 
 const DragAndDrop = () => {
-	const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]);
 
-	const { getRootProps, getInputProps } = useDropzone({
-		accept: 'image/*',
-		onDrop: (acceptedFiles) => {
-			setFiles(
-				acceptedFiles.map((file) =>
-					Object.assign(file, {
-						preview: URL.createObjectURL(file),
-					})
-				)
-			);
-		},
-	});
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
 
-	const images = files.map((file) => (
-		<div key={file.name}>
-			<div>
-				<img
-					src={file.preview}
-					style={{ width: '200px' }}
-					alt='preview'
-				></img>
-			</div>
-		</div>
-	));
-	console.log(files);
+  const images = files.map((file) => (
+    <div key={file.name}>
+      <img
+        src={file.preview}
+        style={{ width: "200px", margin: "10px 0" }}
+        alt="preview"
+      ></img>
+    </div>
+  ));
+  console.log(files);
 
-	let uploadFile = () => console.log('upload file');
+  let uploadFile = () => console.log("upload file");
 
-	return (
-		<>
-			<div
-				{...getRootProps()}
-				className='drop-area'
-				style={{ width: '50vw', height: '300px' }}
-			>
-				<input {...getInputProps()} />
-				<p>Drop files here</p>
-			</div>
-			<button onClick={uploadFile}>Upload</button>
+  return (
+    <>
+      <div
+        {...getRootProps()}
+        className="drop-area"
+        style={{ width: "50vw", height: "200px" }}
+      >
+        <input {...getInputProps()} />
+        <p>
+          Click Here to upload image
+          <br />
+          OR
+          <br />
+          Drop files here
+        </p>
+      </div>
+      <button onClick={uploadFile}>Upload</button>
 
-			<div>{images}</div>
-		</>
-	);
+      {images}
+    </>
+  );
 };
 
 export default DragAndDrop;
